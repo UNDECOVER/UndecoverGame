@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undercover Shop — Артефакты</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <canvas id="bgCanvas"></canvas>
+  <div class="storm-flash" id="stormFlash"></div>
+
+  <header class="topbar">
+    <div class="logo">UNDERCOVER</div>
+    <div class="balance">
+      <span class="icon">◆</span>
+      <span id="artifactCount">0</span>
+      <span class="label">артефактов</span>
+    </div>
+  </header>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-info">
+      <span class="progress-label" id="progressLabel">Следующая роль: Дворник</span>
+      <span class="progress-value" id="progressValue">0 / 75 ◆</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="game">Змейка</button>
+    <button class="tab" data-tab="boot">Boot Breaker</button>
+    <button class="tab" data-tab="upgrade">Upgrade</button>
+    <button class="tab" data-tab="shop">Магазин</button>
+    <button class="tab" data-tab="inventory">Инвентарь</button>
+  </nav>
+
+  <!-- ЗМЕЙКА -->
+  <section class="panel active" id="panel-game">
+    <div class="game-wrap">
+      <div class="stats">
+        <div>Счёт: <span id="score">0</span></div>
+        <div>Рекорд: <span id="best">0</span></div>
+        <div>Награда: <span id="reward">0</span></div>
+      </div>
+      <canvas id="gameCanvas" width="400" height="400"></canvas>
+      <div class="controls">
+        <button id="startBtn" class="btn primary">Начать игру</button>
+        <button id="pauseBtn" class="btn" disabled>Пауза</button>
+      </div>
+      <p class="hint">Управление: <b>стрелки</b> или <b>WASD</b>. На мобильном — свайпы.</p>
+    </div>
+  </section>
+
+  <!-- BOOT BREAKER -->
+  <section class="panel" id="panel-boot">
+    <div class="game-wrap">
+      <div class="stats">
+        <div>Золото: <span id="bbGold">0</span></div>
+        <div>Уровень: <span id="bbLevel">1</span></div>
+        <div>Награда: <span id="bbReward">0</span> ◆</div>
+      </div>
+      <canvas id="bootCanvas" width="400" height="500"></canvas>
+      <div class="controls">
+        <button id="bootStartBtn" class="btn primary">Начать</button>
+        <button id="bootPauseBtn" class="btn" disabled>Пауза</button>
+        <button id="bootStopBtn" class="btn" disabled>Забрать награду</button>
+      </div>
+      <p class="hint">
+        <b>← →</b> или <b>A / D</b> — движение платформы · <b>Пробел</b> или <b>клик</b> — запустить сапог
+      </p>
+    </div>
+  </section>
+
+  <!-- UPGRADE -->
+  <section class="panel" id="panel-upgrade">
+    <div class="game-wrap">
+      <h2 class="panel-title">UPGRADE</h2>
+      <p class="panel-sub">Рискни артефактами ради крупного выигрыша</p>
+
+      <div class="upgrade-wheel-wrap">
+        <div class="upgrade-wheel-glow"></div>
+        <div class="wheel-pointer"></div>
+        <div class="wheel-viewport">
+          <div class="wheel-track" id="wheelTrack"></div>
+        </div>
+      </div>
+
+      <div class="upgrade-controls">
+        <label class="up-label">
+          <span>Ставка</span>
+          <input type="number" id="betInput" min="1" value="20" />
+        </label>
+
+        <div class="quick-bets">
+          <button class="qbet" data-bet="10">10</button>
+          <button class="qbet" data-bet="25">25</button>
+          <button class="qbet" data-bet="50">50</button>
+          <button class="qbet" data-bet="100">100</button>
+          <button class="qbet" data-bet="all">ВСЁ</button>
+        </div>
+      </div>
+
+      <div class="multipliers" id="multipliers"></div>
+
+      <div class="upgrade-info" id="upgradeInfo">
+        Ставка: <b>20</b> ◆ → Получишь: <b>—</b> ◆ · Шанс: <b>—</b>%
+      </div>
+
+      <div class="controls">
+        <button id="upgradeBtn" class="btn primary">КРУТИТЬ</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- МАГАЗИН -->
+  <section class="panel" id="panel-shop">
+    <h2 class="panel-title">Магазин предметов Undecover Shop</h2>
+    <p class="panel-sub">Выберите предмет для покупки из списка ниже:</p>
+    <div class="shop-list" id="shopList"></div>
+  </section>
+
+  <!-- ИНВЕНТАРЬ -->
+  <section class="panel" id="panel-inventory">
+    <h2 class="panel-title">Ваша коллекция</h2>
+    <p class="panel-sub">Все роли, которые вы получили</p>
+    <div class="inventory-grid" id="inventoryList"></div>
+    <p class="inv-note">
+      Чтобы вам эти роли выдали, напишите в Discord разработчику: <b>@yanasakayy</b>
+    </p>
+  </section>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="celebration" id="celebration">
+    <div class="celebration-inner">
+      <div class="celebration-icon">🏆</div>
+      <div class="celebration-title">РОЛЬ ПОЛУЧЕНА</div>
+      <div class="celebration-name" id="celebrationName">Дворник</div>
+      <div class="celebration-sub">Теперь она ваша в Discord</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
